@@ -13,4 +13,9 @@ psd
 thumb
 sketch
 
+# Environment variables
+.env
+server/.env
+*.env
+
 # End of https://mrkandreev.name/snippets/gitignore-generator/#react
