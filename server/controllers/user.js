@@ -35,4 +35,10 @@ async function register(input) {
   }
 }
 
-export default { register };
+async function login(input) {
+  const { email, password } = input;
+  console.log('Email:', email);
+  console.log('Password:', password);
+}
+
+export default { register, login };
