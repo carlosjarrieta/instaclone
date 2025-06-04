@@ -1,5 +1,18 @@
 import User from '../models/user.js';
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+function createToken(user, SECRET_KEY, expiresIn) {
+  const { id, name, email, username } = user;
+  const payload = {
+    id,
+    name,
+    email,
+    username,
+  };
+
+  return jwt.sign(payload, SECRET_KEY, { expiresIn });
+}
 
 async function register(input) {
   try {
@@ -37,8 +50,17 @@ async function register(input) {
 
 async function login(input) {
   const { email, password } = input;
-  console.log('Email:', email);
-  console.log('Password:', password);
+
+  const userFound = await User.findOne({ email: email.toLowerCase() });
+
+  if (!userFound) throw new Error('email or password incorrect');
+
+  const passwordSuccess = await bcryptjs.compare(password, userFound.password);
+  if (!passwordSuccess) throw new Error('email or password incorrect');
+
+  return {
+    token: createToken(userFound, process.env.SECRET_KEY, '24h'),
+  };
 }
 
 export default { register, login };
