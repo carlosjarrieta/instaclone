@@ -1,15 +1,16 @@
 import React, {useState} from "react";
-import "./Auth.scss"
 import {Container, Image} from "semantic-ui-react";
+import RegisterForm from "../../components/Auth/RegisterForm";
 import instacloneLogo from "../../assets/images/instaclone.png"
+import "./Auth.scss"
 
 export default function Auth() {
-	const [showLogin, setShowLogin] = useState(true)
+	const [showLogin, setShowLogin] = useState(false)
 	return (
 		<Container fluid className="auth">
 			<Image src={instacloneLogo} alt="Instaclone"/>
 			<div className="container-form">
-				{showLogin ? <p>Formulario de login</p>: <p>Regístrate</p>}
+				{showLogin ? <p>Formulario de login</p> : <RegisterForm setShowLogin={setShowLogin}/>}
 			</div>
 
 			<div className="change-form">
