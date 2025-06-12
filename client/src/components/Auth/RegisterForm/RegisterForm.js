@@ -38,12 +38,12 @@ export default function RegisterForm(props) {
 				<Form.Input type="password" placeholder='Contraseña' name='password'
 				            value={formik.values.password}
 				            onChange={formik.handleChange}
-				            error={formik.errors.password}
+				            error={formik.errors.password && true}
 				/>
 				<Form.Input type="password" placeholder='Repetir Contraseña' name='password_confirm'
 				            value={formik.values.password_confirm}
 				            onChange={formik.handleChange}
-				            error={formik.errors.password_confirm}
+				            error={formik.errors.password_confirm && true}
 				/>
 				<Button className='btn-submit' type='submit'>
 					Registrarse
