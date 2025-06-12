@@ -13,4 +13,11 @@ body {
     background-color: $action;
     color: $font-light;
   }
+
+  .btn-reset {
+    width: 100%;
+    margin-top: 10px;
+    background-color: $warning;
+    color: $font-dark;
+  }
 }
