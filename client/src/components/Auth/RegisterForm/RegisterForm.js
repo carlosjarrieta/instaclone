@@ -2,15 +2,30 @@ import React from 'react';
 import {Form, Button} from 'semantic-ui-react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import {useMutation} from '@apollo/client';
+import {REGISTER} from '../../../gql/user';
 import './RegisterForm.scss';
 
 export default function RegisterForm(props) {
 	const {setShowLogin} = props;
+	const [register] = useMutation(REGISTER);
+
 	const formik = useFormik({
 		initialValues: initialValues(),
 		validationSchema: validationSchema(),
-		onSubmit: (formValues) => {
-			console.log(formValues);
+		onSubmit: async (formData) => {
+			try {
+				const newUser = formData;
+				delete newUser.password_confirm;
+				const data = await register({
+					variables: {
+						input: newUser
+					}
+				});
+				setShowLogin(true);
+			} catch (errors) {
+				console.log(errors.message);
+			}
 		}
 	});
 
