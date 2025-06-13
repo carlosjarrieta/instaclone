@@ -5,11 +5,16 @@ import * as Yup from 'yup';
 import {useMutation} from '@apollo/client';
 import {LOGIN} from '../../../gql/user';
 import {setToken} from '../../../utils/token';
+import useAuth from "../../../hooks/useAuth";
 import './LoginForm.scss';
 
 export default function LoginForm() {
 	const [error, setError] = useState('');
 	const [login] = useMutation(LOGIN);
+
+	const {setUserd} = useAuth();
+
+
 	const formik = useFormik({
 		initialValues: initialValues(),
 		validationSchema: validationSchema(),
@@ -24,6 +29,7 @@ export default function LoginForm() {
 
 				const {token} = data.login;
 				setToken(token);
+				setUserd(token);
 			} catch (error) {
 				setError(error.message)
 			}
