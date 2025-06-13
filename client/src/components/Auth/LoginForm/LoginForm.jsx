@@ -1,12 +1,13 @@
 import React from 'react';
 import {Form, Button} from 'semantic-ui-react';
 import {useFormik} from 'formik';
+import * as Yup from 'yup';
 import './LoginForm.scss';
 
 export default function LoginForm() {
 	const formik = useFormik({
 		initialValues: initialValues(),
-		validationSchema: null,
+		validationSchema: validationSchema(),
 		onSubmit: (formData) => {
 			console.log("Form data submitted:", formData);
 		},
@@ -16,10 +17,12 @@ export default function LoginForm() {
 			<h2>Entra para ver fotos y vídeos de tus amigos</h2>
 			<Form.Input type="text" placeholder='Correo electronico' name='email'
 			            value={formik.values.email}
+			            error={formik.errors.email && true}
 			            onChange={formik.handleChange}
 			/>
 			<Form.Input type="password" placeholder='Contraseña' name='password'
 			            value={formik.values.password}
+			            error={formik.errors.password && true}
 			            onChange={formik.handleChange}
 			/>
 			<Button type='submit' className='btn-submit'>
@@ -34,4 +37,19 @@ function initialValues() {
 		email: '',
 		password: ''
 	};
+}
+
+function validationSchema() {
+	return Yup.object({
+		email: Yup.string()
+			.email("El email no es válido")
+			.matches(
+				/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
+				"El formato del correo no es válido"
+			)
+			.required("El email es obligatorio"),
+		password: Yup.string()
+			.min(6, 'La contraseña debe tener al menos 6 caracteres')
+			.required('La contraseña es obligatoria')
+	});
 }
