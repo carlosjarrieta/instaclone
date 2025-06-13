@@ -18,7 +18,7 @@ export default function RegisterForm(props) {
 			try {
 				const newUser = formData;
 				delete newUser.password_confirm;
-				const data = await register({
+				await register({
 					variables: {
 						input: newUser
 					}

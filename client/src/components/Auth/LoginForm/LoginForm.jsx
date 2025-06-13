@@ -26,7 +26,7 @@ export default function LoginForm() {
 					}
 				});
 
-				const { token } = data.login;
+				const {token} = data.login;
 				setToken(token);
 				setUser(decodeToken(token));
 			} catch (error) {
