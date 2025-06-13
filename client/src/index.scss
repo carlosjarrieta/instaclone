@@ -8,7 +8,7 @@ body {
 }
 
 .ui.form {
-  .btn-submit{
+  .btn-submit {
     width: 100%;
     background-color: $action;
     color: $font-light;
@@ -19,5 +19,11 @@ body {
     margin-top: 10px;
     background-color: $warning;
     color: $font-dark;
+  }
+
+  .error-message {
+    color: $danger;
+    text-align: center;
+    margin: 20px 0 0 0;
   }
 }
