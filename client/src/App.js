@@ -5,7 +5,7 @@ import client from './config/apollo';
 import Auth from "./pages/Auth";
 import {getToken} from './utils/token';
 import AuthContext from "./context/AuthContext";
-import Home from "./pages/home/Home";
+import Home from "./pages/./Home/Home";
 
 export default function App() {
 	const [auth, setAuth] = useState(undefined);
