@@ -8,12 +8,19 @@ const Navigation = () => {
 		<BrowserRouter>
 			<Routes>
 				{map(routes, (route, index) => {
+					const Layout = route.layout;
+					const Component = route.component;
+
 					if (route.path) {
 						return (
 							<Route
 								key={index}
 								path={route.path}
-								element={<route.component/>}
+								element={
+									<Layout>
+										<Component />
+									</Layout>
+								}
 							/>
 						);
 					}
@@ -21,7 +28,11 @@ const Navigation = () => {
 						<Route
 							key={index}
 							path="*"
-							element={<route.component/>}
+							element={
+								<Layout>
+									<Component />
+								</Layout>
+							}
 						/>
 					);
 				})}
