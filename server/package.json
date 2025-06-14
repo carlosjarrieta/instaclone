@@ -6,7 +6,7 @@
   "author": "Carlos Arrieta",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./index.js"
+    "start": "nodemon ./index.js"
   },
   "dependencies": {
     "apollo-server": "^3.13.0",
