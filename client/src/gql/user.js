@@ -29,6 +29,7 @@ export const GET_USER = gql`
             email
             avatar
             bio
+	        website
         }
     }
 `;
