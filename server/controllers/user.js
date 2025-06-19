@@ -71,4 +71,14 @@ async function getUser(id, username) {
 	return user;
 }
 
-export default {register, login, getUser};
+async function updateAvatar(file) {
+	console.log(file);
+	return null;
+}
+
+export default {
+	register,
+	login,
+	getUser,
+	updateAvatar
+};
