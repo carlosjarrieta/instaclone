@@ -72,7 +72,7 @@ async function getUser(id, username) {
 }
 
 async function updateAvatar(file) {
-	console.log(file);
+	console.log("Server:", file);
 	return null;
 }
 

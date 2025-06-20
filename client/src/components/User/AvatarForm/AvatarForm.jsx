@@ -10,19 +10,21 @@ export default function AvatarForm(props) {
 	const [updateAvatar] = useMutation(UPDATE_AVATAR)
 
 	const onDrop = useCallback(async (acceptedFiles) => {
-		const file = acceptedFiles[0];
+		const file = acceptedFiles[0]
 		try {
-			console.log(file);
 			const result = await updateAvatar({variables: {file}});
-		} catch (e) {
-			console.log(e);
+			console.log(result);
+		} catch (error) {
+			console.error("Error uploading file:", error);
+
 		}
-	}, []);
+
+	}, [updateAvatar]);
 
 	const {getRootProps, getInputProps} = useDropzone({
-		accept: 'image/*',
+		accept: "image/jpeg, image/png",
 		noKeyboard: true,
-		multiple: true,
+		multiple: false,
 		onDrop,
 	});
 

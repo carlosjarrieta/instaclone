@@ -1,26 +1,35 @@
+import express from 'express';
+import {ApolloServer} from 'apollo-server-express';
 import mongoose from 'mongoose';
-import {ApolloServer} from 'apollo-server';
+import dotenv from 'dotenv';
 import typeDefs from './gql/schema.js';
 import resolvers from './gql/resolver.js';
-import dotenv from 'dotenv';
+import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 
 dotenv.config({path: '.env'});
 
-try {
+async function startServer() {
 	await mongoose.connect(process.env.BBDD);
-	console.log('Connected to MongoDB successfully');
-	server();
-} catch (err) {
-	console.error('Error connecting to the database:', err);
-}
+	console.log('✅ Connected to MongoDB');
 
-function server() {
-	const apolloServer = new ApolloServer({
+	const app = express();
+
+	app.use(graphqlUploadExpress());
+
+	const server = new ApolloServer({
 		typeDefs,
 		resolvers,
 	});
 
-	apolloServer.listen().then(({url}) => {
-		console.log(`🚀 Server ready at ${url}`);
-	});
+	await server.start();
+	server.applyMiddleware({app});
+
+	app.listen({port: 4000}, () =>
+		console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+	);
+
 }
+
+startServer().catch(err => {
+	console.error('❌ Error in startServer:', err);
+});

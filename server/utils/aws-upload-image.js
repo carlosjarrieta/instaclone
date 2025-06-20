@@ -28,4 +28,4 @@ async function awsUploadImage(file, filePath) {
 	}
 }
 
-module.exports = awsUploadImage;
+export default awsUploadImage;
