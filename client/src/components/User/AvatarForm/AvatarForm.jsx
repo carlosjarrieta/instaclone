@@ -12,6 +12,7 @@ export default function AvatarForm(props) {
 	const onDrop = useCallback(async (acceptedFiles) => {
 		const file = acceptedFiles[0];
 		try {
+			console.log(file);
 			const result = await updateAvatar({variables: {file}});
 		} catch (e) {
 			console.log(e);
